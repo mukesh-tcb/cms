@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- <template id="custom_report_layout">
+        <t t-call="web.basic_layout">
+            <div class="page">
+                <header>
+                    <div class="header-content">
+                        <img t-att-src="'custom-addons/cms/tcb_hms_base/static/src/img/header_image.png'" 
+                             style="width: 100%; height: auto;" 
+                             alt="Header Image"/>
+                    </div>
+                    <h2>My Custom Header</h2>
+                </header>
+                <main>
+                    <t t-raw="0"/>
+                </main>
+                <footer>
+                    <img t-att-src="'custom-addons/cms/tcb_hms_base/static/src/img/footer_image.png'" 
+                            style="width: 100%; height: auto;" 
+                            alt="Footer Image"/>
+                    <p>My Custom Footer - Page <span t-esc="page"/></p>
+                </footer>
+            </div>
+        </t>
+    </template> -->
+
+    <!-- <template id="external_layout_standard" inherit_id="web.external_layout_standard">
+        <xpath expr="//div[@name='company_address']" position="replace">
+            <div name="company_address">
+                <span t-field="company.partner_id"
+                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+            </div>
+        </xpath>
+    </template> -->
+
+    <!-- <template id="external_layout_background" inherit_id="web.external_layout_background">
+        <xpath expr="//div[@name='company_address']" position="replace">
+            <div name="company_address" class="float-right mb-4">
+                <span t-field="company.partner_id"
+                      t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+            </div>
+        </xpath>
+    </template> -->
+
+    <!-- <template id="custom_external_layout">
+        <t t-set="company" t-value="company or env.company"/>
+        <div t-if="company" class="header">
+            <div class="row">
+                <div class="col-3">
+                    <img src="/tcb_hms_base/static/src/img/header_image.png" style="max-height: 45px;" alt="Logo"/>
+                    <!- - <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;" alt="Logo"/> - ->
+                </div>
+                <div class="col-9 text-right" style="margin-top:22px;">
+                    <h3 t-field="company.name"/>
+                </div>
+            </div>
+        </div>
+    
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+    
+        <div t-if="company" class="footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <li t-if="company.phone" class="list-inline-item">Phone: <span t-field="company.phone"/></li>
+                    <li t-if="company.email" class="list-inline-item">Email: <span t-field="company.email"/></li>
+                    <li t-if="company.website" class="list-inline-item">Web: <span t-field="company.website"/></li>
+                </ul>
+                <div name="financial_infos">
+                    <span t-field="company.report_footer"/>
+                </div>
+                <div class="text-muted">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template> -->
+    <template id="appointment_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="company" t-value="o.company_id or env.company"/>
+                <t t-call="tcb_hms_base.custom_standard_external_layout">
+                    <div class="page" style="margin-top: 120px;"> <!-- Added margin-top here -->
+                        <!-- Header Section -->
+                        <div class="border-bottom mb-4">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <h2 class="mb-0" style="color: #2c3e50;">Appointment Slip</h2>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <p class="mb-0" style="color: #7f8c8d;">Date: <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/></p>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!-- Main Content -->
+                        <div class="row">
+                            <!-- Patient Information Card -->
+                            <div class="col-6">
+                                <div class="card mb-4" style="border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    <div class="card-header" style="background-color: #3498db; color: white; border-radius: 10px 10px 0 0;">
+                                        <h4 class="mb-0">Patient Information</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row mb-2">
+                                            <div class="col-12">
+                                                <strong style="color: #2c3e50;">Patient Name:</strong>
+                                                <span class="ml-2" t-field="o.patient_id.name"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-12">
+                                                <strong style="color: #2c3e50;">Appointment ID:</strong>
+                                                <span class="ml-2" t-field="o.name"/>
+                                                <strong style="color: #2c3e50; margin-left: 20px;">DOB:</strong>
+                                                <span class="ml-2" t-field="o.birthday"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-6">
+                                                <strong style="color: #2c3e50;">Gender:</strong>
+                                                <span class="ml-2" t-field="o.gender"/>
+                                            </div>
+                                            <div class="col-6">
+                                                <strong style="color: #2c3e50;">Age:</strong>
+                                                <span class="ml-2" t-field="o.age"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <strong style="color: #2c3e50;">Mobile:</strong>
+                                                <span class="ml-2" t-field="o.mobile"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <!-- Doctor Information Card -->
+                            <div class="col-6">
+                                <div class="card mb-4" style="border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    <div class="card-header" style="background-color: #2ecc71; color: white; border-radius: 10px 10px 0 0;">
+                                        <h4 class="mb-0">Doctor Information</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row mb-2">
+                                            <div class="col-12">
+                                                <strong style="color: #2c3e50;">Physician:</strong>
+                                                <span class="ml-2" t-field="o.physician_id.name"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-12">
+                                                <strong style="color: #2c3e50;">Department:</strong>
+                                                <span class="ml-2" t-field="o.department_id.name"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-12">
+                                                <strong style="color: #2c3e50;">Email:</strong>
+                                                <span class="ml-2" t-field="o.email"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!-- Charges Section -->
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <div class="card" style="border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    <div class="card-header" style="background-color: #e74c3c; color: white; border-radius: 10px 10px 0 0;">
+                                        <h4 class="mb-0">Payment Details</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <strong style="color: #2c3e50;">Charges:</strong>
+                                                <span class="ml-2" t-field="o.amount_total"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!-- Footer Section -->
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="text-center" style="border-top: 1px solid #eee; padding-top: 20px;">
+                                    <small style="color: #7f8c8d;">
+                                        Thank you for choosing our services. For any queries, please contact us at:
+                                        <span t-field="company.email"/>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <!-- <template id="appointment_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <h2>Appointment Report</h2>
+                        <div class="row mt32 mb32">
+                            <div class="col-6">
+                                <strong>Patient:</strong> <span t-field="o.patient_id.name"/>
+                                <br/>
+                                <strong>Appointment ID:</strong> <span t-field="o.name"/>
+                                <br/>
+                                <strong>Date of Birth:</strong> <span t-field="o.birthday"/>
+                                <br/>
+                                <strong>Gender:</strong> <span t-field="o.gender"/>
+                            </div>
+                            <img t-att-src="'footer_image.png'" 
+                            style="width: 100%; height: auto;" 
+                            alt="Footer Image"/>
+                            <div class="col-6">
+                                <strong>Physician:</strong> <span t-field="o.physician_id.name"/>
+                                <br/>
+                                <strong>Department:</strong> <span t-field="o.department_id.name"/>
+                                <br/>
+                                <strong>Mobile:</strong> <span t-field="o.mobile"/>
+                                <br/>
+                                <strong>Email:</strong> <span t-field="o.email"/>
+                            </div>
+                        </div>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Blood Group</th>
+                                    <th>Age</th>
+                                    <th>Marital Status</th>
+                                    <th>Occupation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span t-field="o.blood_group"/></td>
+                                    <td><span t-field="o.age"/></td>
+                                    <td><span t-field="o.marital_status"/></td>
+                                    <td><span t-field="o.occupation"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+        
+    </template> -->
+
+
+    
+    
+</odoo> 

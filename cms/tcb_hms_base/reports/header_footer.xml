@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Header Section -->
+    <template id="custom_standard_external_layout" inherit_id="web.external_layout_standard">
+        <!-- Header Replacement -->
+        <xpath expr="//div[1]" position="replace">
+            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                <!-- Main Header Container with shadow and subtle gradient -->
+                <div class="container-fluid" style="background: linear-gradient(to right, #ffffff, #f8f9fa); box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 20px 0;">
+                    <div class="row align-items-center">
+                        <!-- Left side: Logo and Hospital Name -->
+                        <div class="col-6">
+                            <div class="row align-items-center">
+                                <!-- Logo Section -->
+                                <div class="col-4">
+                                    <div class="logo-container" style="background: white; padding: 10px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                                            style="max-height: 120px; max-width: 100%;" alt="Logo"/>
+                                    </div>
+                                </div>
+                                <!-- Company Info Section -->
+                                <div class="col-8">
+                                    <div style="font-size: 32px; font-weight: bold; color: #2c3e50; margin-bottom: 8px; font-family: 'Arial', sans-serif;" 
+                                        t-field="company.name"/>
+                                    <div style="font-size: 24px; color: #2c3e50; margin-bottom: 4px; ">
+                                        General Physician Clinic
+                                    </div>
+                                    <div style="font-size: 22px; color: #7f8c8d;" t-field="company.report_header"/>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Right side: Address and Contact Info -->
+                        <div class="col-6">
+                            <div class="contact-container" style="background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-left: 50px;">
+                                <div class="text-right">
+                                    <div t-field="company.partner_id"
+                                        t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'
+                                        style="font-size: 22px; color: #2c3e50; margin-bottom: 10px; line-height: 1.4;"/>
+                                    <div style="font-size: 22px; color: #3498db;">
+                                        <i class="fa fa-envelope" style="margin-right: 5px;"/> 
+                                        <span t-field="company.email"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Decorative Divider -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            
+                            <div style="border-bottom: 2px solid black;"/>
+                            <div style="height: 3px; background: linear-gradient(to right, #3498db, #2ecc71);"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+
+        <!-- Footer Replacement -->
+        <xpath expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']" position="replace">
+            <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+                <div style="background: linear-gradient(to right, #f8f9fa, #ffffff); box-shadow: 0 -2px 4px rgba(0,0,0,0.05); padding: 15px 0;">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <!-- Left Column: Web and Email -->
+                            <div class="col-9">
+                                <div style="border-top: 2px solid #3498db;" class="text-left pt-3">
+                                    <div style="font-size: 20px; color: #2c3e50;">
+                                        <span style="display: inline-block; margin-right: 20px;">
+                                            <i class="fa fa-globe" style="color: #3498db; margin-right: 5px;"/>
+                                            Web: <span t-field="company.website" style="color: #3498db;"/>
+                                        </span>
+                                        <span style="display: inline-block;">
+                                            <i class="fa fa-envelope" style="color: #3498db; margin-right: 5px;"/>
+                                            Mail: <span t-field="company.email" style="color: #3498db;"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Right Column: Page Numbers -->
+                            <div class="col-3">
+                                <div style="border-top: 2px solid #3498db;" class="text-right pt-3">
+                                    <div style="font-size: 20px; color: #2c3e50;">
+                                        <i class="fa fa-file-text" style="color: #3498db; margin-right: 5px;"/>
+                                        Page: <span class="page"/> / <span class="topage"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
+
+
+
+
+
+
+<!-- <odoo>
+    <template id="custom_external_layout" inherit_id="web.external_layout" primary="True">
+        <xpath expr="//t[@t-call='web.external_layout_standard']" position="attributes">
+            <attribute name="t-call">tcb_hms_base.custom_layout</attribute>
+        </xpath>
+    </template>
+
+    <template id="custom_layout">
+        <div t-attf-class="header o_company_#{company.id}_layout">
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 450px; max-width: 100%; align-self: left" alt="Logo"/>
+                </div>
+                <div class="col-9 text-right" style="margin-top:22px;">
+                    <h2 t-field="company.name"/>
+                    <h2 t-field="company.street"/>
+                    <h2 t-field="company.street2"/>
+
+                </div>
+            </div>
+        </div>
+
+        <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout">
+            <t t-raw="0" />
+        </div>
+
+        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <li t-if="company.phone" class="list-inline-item">Phone: <span t-field="company.phone"/></li>
+                    <li t-if="company.email" class="list-inline-item">Email: <span t-field="company.email"/></li>
+                    <li t-if="company.website" class="list-inline-item">Web: <span t-field="company.website"/></li>
+                    <li t-if="company.vat" class="list-inline-item"><t t-esc="company.country_id.vat_label or 'Tax ID'"/>: <span t-field="company.vat"/></li>
+                </ul>
+
+                <div name="financial_infos">
+                    <span t-field="company.report_footer"/>
+                </div>
+
+                <div class="text-muted">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template> 
+</odoo>-->
