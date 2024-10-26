@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <odoo>
         <record id="action_report_hms_appointment" model="ir.actions.report">
             <field name="name">Appointment Report</field>
             <field name="model">hms.appointment</field>
@@ -12,6 +11,5 @@
             <field name="binding_model_id" ref="model_hms_appointment"/>
             <field name="binding_type">report</field>
         </record>
-    </odoo>
 
 </odoo>
