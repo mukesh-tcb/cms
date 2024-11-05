@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hms_patient,tcb.ophthalmology.evaluation,model_tcb_ophthalmology_evaluation,,1,1,1,1
+
+access_eye_sph,access_eye_sph,model_eye_sph,,1,1,1,1
+access_eye_cyl,access_eye_cyl,model_eye_cyl,,1,1,1,1
+access_eye_axis,access_eye_axis,model_eye_axis,,1,1,1,1
+access_eye_add,access_eye_add,model_eye_add,,1,1,1,1
+access_refraction_pog_type,access_refraction_pog_type,model_refraction_pog_type,,1,1,1,1
+access_refraction_pog_type,access_refraction_pog_type,model_refraction_pog_type,,1,1,1,1
+access_unaided_dist_eye,unaided.dist.eye,model_unaided_dist_eye,,1,1,1,1
+access_unaided_near_eye,unaided.near.eye,model_unaided_near_eye,,1,1,1,1

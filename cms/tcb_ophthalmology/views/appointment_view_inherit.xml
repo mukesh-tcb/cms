@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="appointment_form_view_inherit" model="ir.ui.view">
+        <field name="name">appointment.form.inherit</field>
+        <field name="model">hms.appointment</field>
+        <field name="inherit_id" ref="tcb_hms_base.view_hms_appointment_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//button[@name='action_create_invoice']" position="after">
+                <button string="Refer To Ophthalmology" name="action_refer_ophthalmology" type="object" class="oe_highlight"/>
+            </xpath>
+            </field>
+        </record>
+
+</odoo>

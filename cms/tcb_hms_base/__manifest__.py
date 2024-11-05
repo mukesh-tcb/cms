@@ -12,7 +12,7 @@
     'category': 'education',
     'version': '0.1',
 
-    'depends': ['base','mail','hr','product','account'],
+    'depends': ['base','mail','hr','product','account',],
 
     'data': [
         'security/ir.model.access.csv',

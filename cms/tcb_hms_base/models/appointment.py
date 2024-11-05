@@ -129,7 +129,15 @@ class Appointment(models.Model):
             'res_id': invoice.id,
             'type': 'ir.actions.act_window',
         }
-    
+        
+    # def action_refer_opthmatology(self):
+    #     return {
+    #         'name': _('Refer to Ophthalmology'),
+    #         'view_mode': 'form',
+    #         'res_model': 'hms.opthmology',
+    #         'type': 'ir.actions.act_window',
+    #     }
+        
     @api.model
     def create(self, vals):
         if not vals.get('name'):
